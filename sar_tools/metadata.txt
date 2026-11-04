@@ -1,0 +1,15 @@
+[general]
+name=QGIS SAR Tools
+description=Przygotowanie operacji SAR: mapy Polski, planowanie, struktura GPS i lokalizacja adresów.
+about=Lokalna wtyczka SAR. Tworzy projekt i GeoPackage, dodaje podkłady Geoportalu/BDL/OSM, wyszukuje adresy i organizuje dane do GPS oraz z GPS. Integracja urządzeń i analizy są oznaczone jako planowane.
+version=0.1.0
+qgisMinimumVersion=4.0
+qgisMaximumVersion=4.99
+author=QGIS SAR Tools Project
+category=Vector
+icon=icon.svg
+experimental=True
+deprecated=False
+hasProcessingProvider=False
+tags=SAR,poszukiwania,Geoportal,GPS,planowanie
+supportsQt6=True
