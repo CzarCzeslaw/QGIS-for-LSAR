@@ -1,0 +1,221 @@
+[
+  {
+    "id": "ortho",
+    "name": "Geoportal — ortofotomapa",
+    "type": "wmts",
+    "url": "https://mapy.geoportal.gov.pl/wss/service/PZGIK/ORTO/WMTS/StandardResolution",
+    "group": "basemaps",
+    "default_visible": true,
+    "opacity": 1,
+    "attribution": "Główny Urząd Geodezji i Kartografii",
+    "documentation": "https://www.geoportal.gov.pl/pl/usluga/wykaz-uslug/"
+  },
+  {
+    "id": "ortho_hd",
+    "name": "Geoportal — ortofotomapa wysokiej rozdzielczości",
+    "type": "wmts",
+    "url": "https://mapy.geoportal.gov.pl/wss/service/PZGIK/ORTO/WMTS/HighResolution",
+    "group": "basemaps",
+    "default_visible": false,
+    "opacity": 1,
+    "attribution": "Główny Urząd Geodezji i Kartografii",
+    "documentation": "https://www.geoportal.gov.pl/pl/usluga/wykaz-uslug/"
+  },
+  {
+    "id": "topo",
+    "name": "Geoportal — mapa podkładowa BDOT10k / BDOO",
+    "type": "wmts",
+    "url": "https://mapy.geoportal.gov.pl/wss/service/WMTS/guest/wmts/G2_MOBILE_500",
+    "group": "basemaps",
+    "default_visible": false,
+    "opacity": 1,
+    "attribution": "Główny Urząd Geodezji i Kartografii",
+    "documentation": "https://www.geoportal.gov.pl/pl/usluga/wykaz-uslug/"
+  },
+  {
+    "id": "bdot",
+    "name": "Geoportal — wizualizacja BDOT10k",
+    "type": "wmts",
+    "url": "https://mapy.geoportal.gov.pl/wss/service/WMTS/guest/wmts/BDOT10k",
+    "group": "basemaps",
+    "default_visible": false,
+    "opacity": 1,
+    "attribution": "Główny Urząd Geodezji i Kartografii",
+    "documentation": "https://www.geoportal.gov.pl/pl/usluga/wykaz-uslug/"
+  },
+  {
+    "id": "topo_archive",
+    "name": "Geoportal — skany topo (ARCHIWALNE)",
+    "type": "wmts",
+    "url": "https://mapy.geoportal.gov.pl/wss/service/WMTS/guest/wmts/TOPO",
+    "group": "basemaps",
+    "default_visible": false,
+    "opacity": 1,
+    "attribution": "Główny Urząd Geodezji i Kartografii",
+    "documentation": "https://www.geoportal.gov.pl/pl/usluga/wykaz-uslug/"
+  },
+  {
+    "id": "hillshade",
+    "name": "Geoportal — cieniowanie NMT",
+    "type": "wmts",
+    "url": "https://mapy.geoportal.gov.pl/wss/service/PZGIK/NMT/GRID1/WMTS/ShadedRelief",
+    "group": "relief",
+    "default_visible": false,
+    "opacity": 0.4,
+    "attribution": "Główny Urząd Geodezji i Kartografii",
+    "documentation": "https://www.geoportal.gov.pl/pl/usluga/wykaz-uslug/"
+  },
+  {
+    "id": "hypsometry",
+    "name": "Geoportal — hipsometria NMT",
+    "type": "wmts",
+    "url": "https://mapy.geoportal.gov.pl/wss/service/PZGIK/NMT/GRID1/WMTS/Hypsometry",
+    "group": "relief",
+    "default_visible": false,
+    "opacity": 1,
+    "attribution": "Główny Urząd Geodezji i Kartografii",
+    "documentation": "https://www.geoportal.gov.pl/pl/usluga/wykaz-uslug/"
+  },
+  {
+    "id": "relief",
+    "name": "Geoportal — hipsometria z cieniowaniem",
+    "type": "wmts",
+    "url": "https://mapy.geoportal.gov.pl/wss/service/PZGIK/NMT/GRID1/WMTS/HypsometryAndShadedRelief",
+    "group": "relief",
+    "default_visible": false,
+    "opacity": 1,
+    "attribution": "Główny Urząd Geodezji i Kartografii",
+    "documentation": "https://www.geoportal.gov.pl/pl/usluga/wykaz-uslug/"
+  },
+  {
+    "id": "forest_sections",
+    "name": "BDL — oddziały leśne",
+    "type": "wms",
+    "url": "https://mapserver.bdl.lasy.gov.pl/ArcGIS/services/WMS_BDL/MapServer/WMSServer",
+    "layers": [
+      "2",
+      "3"
+    ],
+    "group": "forest",
+    "default_visible": false,
+    "opacity": 1,
+    "attribution": "Bank Danych o Lasach / Lasy Państwowe",
+    "documentation": "https://www9.bdl.lasy.gov.pl/portal/uslugi-ogc?v=1"
+  },
+  {
+    "id": "forest_subsections",
+    "name": "BDL — wydzielenia leśne",
+    "type": "wms",
+    "url": "https://mapserver.bdl.lasy.gov.pl/ArcGIS/services/WMS_BDL/MapServer/WMSServer",
+    "layers": [
+      "0",
+      "1"
+    ],
+    "group": "forest",
+    "default_visible": false,
+    "opacity": 1,
+    "attribution": "Bank Danych o Lasach / Lasy Państwowe",
+    "documentation": "https://www9.bdl.lasy.gov.pl/portal/uslugi-ogc?v=1"
+  },
+  {
+    "id": "forest_admin",
+    "name": "BDL — leśnictwa i nadleśnictwa",
+    "type": "wms",
+    "url": "https://mapserver.bdl.lasy.gov.pl/ArcGIS/services/WMS_BDL/MapServer/WMSServer",
+    "layers": [
+      "4",
+      "5"
+    ],
+    "group": "forest",
+    "default_visible": false,
+    "opacity": 1,
+    "attribution": "Bank Danych o Lasach / Lasy Państwowe",
+    "documentation": "https://www9.bdl.lasy.gov.pl/portal/uslugi-ogc?v=1"
+  },
+  {
+    "id": "osm",
+    "name": "OpenStreetMap",
+    "type": "xyz",
+    "url": "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+    "group": "basemaps",
+    "zmin": 0,
+    "zmax": 19,
+    "default_visible": false,
+    "opacity": 1,
+    "attribution": "© OpenStreetMap contributors",
+    "documentation": "https://operations.osmfoundation.org/policies/tiles/",
+    "attribution_url": "https://www.openstreetmap.org/copyright"
+  },
+  {
+    "id": "forest_access",
+    "name": "BDL — dojazdy pożarowe i punkty wody",
+    "type": "wms",
+    "url": "https://mapserver.bdl.lasy.gov.pl/ArcGIS/services/WMS_BDL_dojazdy_pozarowe/MapServer/WMSServer",
+    "layers": [
+      "0",
+      "1"
+    ],
+    "group": "forest",
+    "default_visible": false,
+    "opacity": 1,
+    "attribution": "Bank Danych o Lasach / Lasy Państwowe",
+    "documentation": "https://www9.bdl.lasy.gov.pl/portal/uslugi-ogc?v=1"
+  },
+  {
+    "id": "forest_tourism",
+    "name": "BDL — szlaki i infrastruktura turystyczna",
+    "type": "wms",
+    "url": "https://mapserver.bdl.lasy.gov.pl/ArcGIS/services/WMS_BDL_Mapa_turystyczna/MapServer/WMSServer",
+    "layers": [
+      "1",
+      "2",
+      "4",
+      "13",
+      "14",
+      "15",
+      "16",
+      "17",
+      "18",
+      "19",
+      "20",
+      "21",
+      "22"
+    ],
+    "group": "forest",
+    "default_visible": false,
+    "opacity": 1,
+    "attribution": "Bank Danych o Lasach / Lasy Państwowe",
+    "documentation": "https://www9.bdl.lasy.gov.pl/portal/uslugi-ogc?v=1"
+  },
+  {
+    "id": "forest_bans",
+    "name": "BDL — okresowe zakazy wstępu",
+    "type": "wms",
+    "url": "https://mapserver.bdl.lasy.gov.pl/ArcGIS/services/WMS_zakazy_wstepu_do_lasu/MapServer/WMSServer",
+    "layers": [
+      "3"
+    ],
+    "group": "forest",
+    "default_visible": false,
+    "opacity": 1,
+    "attribution": "Bank Danych o Lasach / Lasy Państwowe",
+    "documentation": "https://www9.bdl.lasy.gov.pl/portal/uslugi-ogc?v=1"
+  },
+  {
+    "id": "forest_stands",
+    "name": "BDL — drzewostany",
+    "type": "wms",
+    "url": "https://mapserver.bdl.lasy.gov.pl/ArcGIS/services/WMS_BDL_mapa_drzewostanow/MapServer/WMSServer",
+    "layers": [
+      "0",
+      "1",
+      "2",
+      "3"
+    ],
+    "group": "forest",
+    "default_visible": false,
+    "opacity": 1,
+    "attribution": "Bank Danych o Lasach / Lasy Państwowe",
+    "documentation": "https://www9.bdl.lasy.gov.pl/portal/uslugi-ogc?v=1"
+  }
+]
