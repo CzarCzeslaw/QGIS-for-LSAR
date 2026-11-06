@@ -1,0 +1,72 @@
+name: Prepare verified migration history
+on:
+  push:
+    branches: [migration/import-transport]
+permissions:
+  contents: write
+concurrency: qgis-archive-import
+jobs:
+  prepare:
+    if: github.repository == 'CzarCzeslaw/QGIS-for-LSAR'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Check for complete transport
+        id: transport
+        run: |
+          if test -f history.bundle.part00 && test -f history.bundle.part01; then
+            cat history.bundle.part00 history.bundle.part01 > "$RUNNER_TEMP/history.bundle"
+            echo 'd496ad4fd7cd096b62d94b2de10569226d76b1d7f4b203ba891d790f6c8a7257  history.bundle' | (cd "$RUNNER_TEMP" && sha256sum -c)
+            echo 'ready=true' >> "$GITHUB_OUTPUT"
+          fi
+      - name: Prepare dated branches and release tags
+        if: steps.transport.outputs.ready == 'true'
+        run: |
+          git config user.name 'Cezary Czwal'
+          git config user.email '21066202+CzarCzeslaw@users.noreply.github.com'
+          git fetch --no-tags "$RUNNER_TEMP/history.bundle" 'refs/heads/*:refs/archive/heads/*' 'refs/tags/*:refs/archive/tags/*'
+          python3 - <<'PY'
+          import json, subprocess
+          from pathlib import Path
+
+          def git(*args, stdin=None):
+              return subprocess.check_output(['git', *args], input=stdin, text=True).strip()
+
+          root = '0029d008fce09798b12e60a5a7aee2de94294bc0'
+          first_merge = '870972096ba659adaf760d8c13e9322dea332d1e'
+          first_head = '0776a8f0326cf691786ef2e763348f2f2ceaa52c'
+          archive = 'refs/archive/heads/main'
+          if git('rev-parse', 'origin/main') != first_merge:
+              raise SystemExit('Inspect main before resuming the migration')
+          if git('rev-parse', archive) != '7d910895f5627189d6e9057e6a7232374da7a0e4':
+              raise SystemExit('Unexpected archive')
+          mapping = {root: first_merge}
+          for row in git('rev-list', '--topo-order', '--reverse', '--parents', archive).splitlines():
+              old, *parents = row.split()
+              if old == root:
+                  continue
+              tree = git('rev-parse', old + '^{tree}')
+              args = [s for p in parents for s in ('-p', mapping[p])]
+              message = git('show', '-s', '--format=%B', old)
+              mapping[old] = git('commit-tree', tree, *args, stdin=message + '\n')
+          plan = json.loads(git('show', archive + ':docs/history/pull_requests.json'))
+          refs = []
+          for pr in plan['pull_requests']:
+              old = git('rev-parse', 'refs/archive/heads/' + pr['head'])
+              merge = pr.get('merge_commit') or git('rev-parse', archive)
+              pr.update(published_head=mapping[old], prepared_merge=mapping[merge])
+              refs.append(mapping[old] + ':refs/heads/' + pr['head'])
+          for ref in git('for-each-ref', '--format=%(refname)', 'refs/archive/tags').splitlines():
+              old = git('rev-parse', ref)
+              sha = first_head if old == root else mapping[old]
+              refs.append(sha + ':' + ref.replace('refs/archive/tags/', 'refs/tags/', 1))
+          refs.append(mapping[git('rev-parse', archive)] + ':refs/heads/migration/prepared-history')
+          compact = [{k:p[k] for k in ('head','published_head','prepared_merge')} for p in plan['pull_requests']]
+          Path('migration-map.json').write_text(json.dumps(compact, indent=2) + '\n')
+          git('add', 'migration-map.json')
+          git('commit', '-m', 'Record verified migration commit mapping')
+          refs.append('HEAD:refs/heads/migration/import-transport')
+          git('push', '--atomic', 'origin', *refs)
+          PY
